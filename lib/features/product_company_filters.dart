@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app/mock_data.dart';
 import 'package:shopping_app/widgets/custom_filter_chip.dart';
 
 class ProductCompanyFilters extends StatefulWidget {
@@ -9,7 +10,6 @@ class ProductCompanyFilters extends StatefulWidget {
 }
 
 class _ProductCompanyFiltersState extends State<ProductCompanyFilters> {
-  final List<String> filters = const ['All', 'Addidas', 'Bata', 'Nike'];
   late String selectedFilter;
 
   @override

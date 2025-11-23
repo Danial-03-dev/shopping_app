@@ -17,7 +17,7 @@ final products = [
   },
   {
     'id': '2',
-    'title': 'Bata Women\'s Shoes',
+    'title': 'Bata Men\'s Shoes',
     'price': 28.95,
     'imageUrl': 'assets/images/shoes_3.png',
     'company': 'Bata',
@@ -33,13 +33,4 @@ final products = [
   },
 ];
 
-final cart = [
-  {
-    'id': '3',
-    'title': 'Jordan Shoes',
-    'price': 420.69,
-    'imageUrl': 'assets/images/shoes_4.png',
-    'company': 'Nike',
-    'size': 8,
-  },
-];
+final List<String> filters = const ['All', 'Addidas', 'Bata', 'Nike', 'Jordan'];
