@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app/classes/provider/cart_provider.dart';
+import 'package:shopping_app/widgets/primary_button.dart';
+import 'package:shopping_app/widgets/shoe_size_list.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final Map<String, dynamic> product;
@@ -41,6 +43,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     final String price = widget.product['price'].toString();
     final List<int> sizes = widget.product['sizes'];
 
+    void handleSizeSelect(int size) {
+      setState(() {
+        selectedSize = size;
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(title: Text('Details')),
       body: Column(
@@ -67,44 +75,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('\$$price', style: Theme.of(context).textTheme.titleLarge),
-                SizedBox(
-                  height: 48,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: sizes.length,
-                    itemBuilder: (context, index) {
-                      final size = sizes[index];
-                      final Color? chipColor = selectedSize == size
-                          ? Theme.of(context).colorScheme.primary
-                          : null;
-
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedSize = size;
-                            });
-                          },
-                          child: Chip(
-                            backgroundColor: chipColor,
-                            label: Text(size.toString()),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                ShoeSizeList(
+                  sizes: sizes,
+                  selectedSize: selectedSize,
+                  onSizeSelect: handleSizeSelect,
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    minimumSize: const Size(412, 50),
-                  ),
+                PrimaryButton(
+                  minimumSize: const Size(412, 50),
                   onPressed: handleAddToCart,
-                  child: Text(
-                    'Add to Cart',
-                    style: TextStyle(color: Colors.black, fontSize: 18),
-                  ),
+                  text: 'Add to Cart',
                 ),
               ],
             ),
