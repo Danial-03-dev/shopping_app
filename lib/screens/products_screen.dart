@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:shopping_app/features/product_company_filters.dart';
 import 'package:shopping_app/features/product_list.dart';
