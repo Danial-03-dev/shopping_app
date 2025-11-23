@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopping_app/classes/provider/cart_provider.dart';
 import 'package:shopping_app/widgets/cart_item.dart';
 import 'package:shopping_app/widgets/delete_dialogue.dart';
+import 'package:shopping_app/widgets/empty_cart.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -38,19 +39,21 @@ class CartScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text('Cart')),
-      body: ListView.builder(
-        itemCount: cart.length,
-        itemBuilder: (context, index) {
-          final cartItem = cart[index];
+      body: cart.isEmpty
+          ? EmptyCart()
+          : ListView.builder(
+              itemCount: cart.length,
+              itemBuilder: (context, index) {
+                final cartItem = cart[index];
 
-          return CartItem(
-            itemData: cartItem,
-            onPressed: () {
-              handleDeleteCartItem(cartItem);
-            },
-          );
-        },
-      ),
+                return CartItem(
+                  itemData: cartItem,
+                  onPressed: () {
+                    handleDeleteCartItem(cartItem);
+                  },
+                );
+              },
+            ),
     );
   }
 }
