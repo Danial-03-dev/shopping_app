@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/classes/provider/products_provider.dart';
 import 'package:shopping_app/mock_data.dart';
 import 'package:shopping_app/widgets/custom_filter_chip.dart';
 
@@ -16,6 +18,10 @@ class _ProductCompanyFiltersState extends State<ProductCompanyFilters> {
   void initState() {
     super.initState();
     selectedFilter = filters[0];
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ProductsProvider>().setCompanyFilter(filters[0]);
+    });
   }
 
   @override
@@ -31,6 +37,7 @@ class _ProductCompanyFiltersState extends State<ProductCompanyFilters> {
           void handleFilter() {
             setState(() {
               selectedFilter = filter;
+              context.read<ProductsProvider>().setCompanyFilter(selectedFilter);
             });
           }
 

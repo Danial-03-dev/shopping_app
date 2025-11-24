@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/classes/provider/products_provider.dart';
 
 class ProductSearchHeader extends StatelessWidget {
   const ProductSearchHeader({super.key});
@@ -10,6 +12,10 @@ class ProductSearchHeader extends StatelessWidget {
       borderRadius: BorderRadius.horizontal(left: Radius.circular(50)),
     );
 
+    void handleSearch(String search) {
+      context.read<ProductsProvider>().setSearch(search);
+    }
+
     return Row(
       spacing: 16,
       children: [
@@ -20,7 +26,7 @@ class ProductSearchHeader extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
-        const Expanded(
+        Expanded(
           child: TextField(
             decoration: InputDecoration(
               hintText: 'Search',
@@ -29,6 +35,7 @@ class ProductSearchHeader extends StatelessWidget {
               enabledBorder: border,
               focusedBorder: border,
             ),
+            onChanged: handleSearch,
           ),
         ),
       ],

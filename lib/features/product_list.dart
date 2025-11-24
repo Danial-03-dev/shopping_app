@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app/mock_data.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/classes/provider/products_provider.dart';
 import 'package:shopping_app/screens/product_detail_screen.dart';
 import 'package:shopping_app/widgets/product_card.dart';
 
-class ProductList extends StatefulWidget {
+class ProductList extends StatelessWidget {
   const ProductList({super.key});
 
   @override
-  State<ProductList> createState() => _ProductListState();
-}
-
-class _ProductListState extends State<ProductList> {
-  final List<String> filters = const ['All', 'Addidas', 'Bata', 'Nike'];
-  late String selectedFilter;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedFilter = filters[0];
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final products = context.watch<ProductsProvider>().filteredProducts();
     return Expanded(
       child: GridView.builder(
         itemCount: products.length,
